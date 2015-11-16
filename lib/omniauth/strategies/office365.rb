@@ -6,22 +6,22 @@ module OmniAuth
       option :name, :office365
 
       option :client_options, {
-        site:          'https://outlook.office365.com/',
-        token_url:     'https://login.windows.net/common/oauth2/token',
-        authorize_url: 'https://login.windows.net/common/oauth2/authorize'
+        site:          'https://outlook.office.com/api/v1.0',
+        token_url:     'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+        authorize_url: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize'
       }
 
       option :authorize_params, {
-        resource: 'https://graph.windows.net/'
+        scope: 'https://outlook.office.com/Calendars.ReadWrite'
       }
 
-      uid { raw_info["objectId"] }
+      uid { raw_info["MailboxGuid"] }
 
       info do
         {
-          'email' => raw_info["userPrincipalName"],
-          'name' => [raw_info["givenName"], raw_info["surname"]].join(' '),
-          'nickname' => raw_info["displayName"]
+          'email' => raw_info["Id"],
+          'name' => raw_info["DisplayName"],
+          'nickname' => raw_info["Alias"]
         }
       end
 
@@ -32,7 +32,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get(authorize_params.resource + 'Me?api-version=1.5').parsed
+        @raw_info ||= access_token.get('https://outlook.office.com/api/v1.0/users/me').parsed
       end
     end
   end
