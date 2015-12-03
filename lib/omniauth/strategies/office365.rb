@@ -6,13 +6,13 @@ module OmniAuth
       option :name, :office365
 
       option :client_options, {
-        site:          'https://outlook.office.com/api/v1.0',
+        site:          'https://outlook.office.com/api/v2.0',
         token_url:     'https://login.microsoftonline.com/common/oauth2/v2.0/token',
         authorize_url: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize'
       }
 
       option :authorize_params, {
-        scope: 'https://outlook.office.com/Calendars.ReadWrite'
+        scope: 'https://outlook.office.com/Calendars.ReadWrite offline_access'
       }
 
       uid { raw_info["MailboxGuid"] }
