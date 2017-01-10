@@ -15,7 +15,7 @@ module OmniAuth
         scope: 'https://outlook.office.com/Calendars.ReadWrite offline_access'
       }
 
-      uid { raw_info["MailboxGuid"] }
+      uid { raw_info["Id"] }
 
       info do
         {
@@ -32,7 +32,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get('https://outlook.office.com/api/v1.0/users/me').parsed
+        @raw_info ||= access_token.get('"https://outlook.office.com/api/v2.0/me/').parsed
       end
     end
   end
