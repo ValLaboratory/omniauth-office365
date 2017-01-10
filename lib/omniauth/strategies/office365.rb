@@ -12,14 +12,14 @@ module OmniAuth
       }
 
       option :authorize_params, {
-        scope: 'https://outlook.office.com/Calendars.ReadWrite offline_access'
+        scope: 'https://outlook.office.com/Calendars.ReadWrite openid email offline_access'
       }
 
       uid { raw_info["Id"] }
 
       info do
         {
-          'email' => raw_info["Id"],
+          'email' => raw_info["EmailAddress"],
           'name' => raw_info["DisplayName"],
           'nickname' => raw_info["Alias"]
         }
