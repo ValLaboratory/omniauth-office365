@@ -19,7 +19,7 @@ module OmniAuth
 
       info do
         {
-          'email' => raw_info["Mail"],
+          'email' => raw_info["EmailAddress"],
           'name' => raw_info["DisplayName"],
           'nickname' => raw_info["Alias"]
         }
