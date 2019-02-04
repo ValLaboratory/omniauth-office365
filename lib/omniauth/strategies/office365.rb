@@ -34,6 +34,11 @@ module OmniAuth
       def raw_info
         @raw_info ||= access_token.get("https://outlook.office.com/api/v2.0/me/").parsed
       end
+
+
+      def  callback_url 
+        full_host + script_name + callback_path
+      end
     end
   end
 end
